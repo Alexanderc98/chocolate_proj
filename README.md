@@ -9,7 +9,7 @@
 
 If you are trying to come up with your first chocolate bar recipe, I have three tips to steer you in the right direction.
 
-These are the three main findings I from looking at the feature importance score ranking and my exploratory analysis in SQL:
+These are the three main findings I found from looking at the feature importance score ranking and my exploratory analysis in SQL:
 
   - The chocolate bars with a cacao percent between 65 and 75 has the highest average rating, so that seems to be a safe range to go for!
   - The chocolate bars with a total of 2 or 3 ingredients has the highest average rating, so think, definetly less is more here!
