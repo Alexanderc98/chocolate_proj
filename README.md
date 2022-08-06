@@ -1,4 +1,4 @@
-# Chocolate_proj
+# Binary classification model and exploratory data analysis of a chocolate bar database.
 
 * Created a tableau dashboard: https://public.tableau.com/app/profile/alexander4055/viz/chocolate_proj/Dashboard1
 * Used advanced SQL techniques to explore the data.
@@ -26,6 +26,6 @@ After downloading the data, I made the following changes:
 * Separated the data to five different sheets and removed duplicates in microsoft excel, so that I could create a great relational database
 
 ## Result
-Below are the result of my binary classification model.
+Below are the result of my binary classification model:
 
 ![alt text](https://github.com/Alexanderc98/chocolate_proj/blob/main/tableau_dashboard.png "Result")
