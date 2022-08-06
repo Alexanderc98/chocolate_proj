@@ -1,6 +1,8 @@
 # EDA and a binary classification model of a chocolate bar database, to try and predict if a chocolate bar will taste bad or not.
 
 * Created a tableau dashboard: https://public.tableau.com/app/profile/alexander4055/viz/chocolate_proj/Dashboard1
+* Used sklearn to create a binary classification model
+* Compared logistic regression, XGBoost and randomforest classification. For instance, did 10-fold cross validation and looked which model performed the best.
 * Used advanced SQL techniques to explore the data.
 * Created a database in third normal form with sqlite3 package in python.
 * Performed data cleaning in pandas and microsoft excel.
@@ -32,7 +34,7 @@ These are the three main findings I found from looking at the feature importance
 After downloading the data, I made the following changes:
 
 * Removed unnecessary columns needed to conduct my analysis
-* Feature engineered
+* Feature engineered dummy variables
 * Separated the data to five different sheets and removed duplicates in microsoft excel, so that I could create a great relational database
 
 ## Result
