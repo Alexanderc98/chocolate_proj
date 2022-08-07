@@ -1,4 +1,4 @@
-# EDA and a binary classification model of a chocolate bar database, to try and predict if a chocolate bar will taste bad or not.
+# Predicting if a chocolate bar will taste bad or not using machine learning + EDA.
 
 * Created a tableau dashboard: https://public.tableau.com/app/profile/alexander4055/viz/chocolate_proj/Dashboard1
 * Used sklearn to create a binary classification model
