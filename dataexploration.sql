@@ -169,4 +169,83 @@ JOIN ingredients_table i
 ON r.review_id = i.review_id
 GROUP BY i.contains_vanilla;
 
--- In this sample, that thesis is true! Chocolates that does not contain vanilla has a higher rating.
+-- In this sample, that thesis seems to be true! Chocolates that does not contain vanilla has a higher rating.
+-- Lets see though if the difference is statistically significant!
+
+SELECT i.contains_vanilla, count(i.contains_vanilla) as count
+FROM ratings_table r
+JOIN ingredients_table i
+ON r.review_id = i.review_id
+GROUP BY i.contains_vanilla;
+
+-- Since count is so large for both option im gonna make an assumption that it can be approximated by a normal distribution.
+-- Hence, I will do a Z-test
+
+-- Firstly, I need the standard deviation for the two options.
+-- Since SQLite does not have built in math functions, I need to calculate variance first and then use an calculator to get the standard dev.
+
+SELECT i.contains_vanilla, avg(r.rating*r.rating) - avg(r.rating)*avg(r.rating) as variance, round(avg(rating), 2) as average_rating
+FROM ratings_table r
+JOIN ingredients_table i
+ON r.review_id = i.review_id
+GROUP BY i.contains_vanilla;
+
+-- sqrt(0.185036716168048) = 0.43016 and sqrt(0.248714980458875) = 0.49871
+-- I rounded to 5 decimals
+
+CREATE VIEW no_vanilla_sd AS
+	SELECT i.contains_vanilla, 0.43016 as standard_dev, round(avg(rating), 2) as average_rating, count(i.contains_vanilla) as count
+	FROM ratings_table r
+	JOIN ingredients_table i
+	ON r.review_id = i.review_id
+	WHERE contains_vanilla = 0
+	GROUP BY i.contains_vanilla;
+
+CREATE VIEW has_vanilla_sd AS
+	SELECT i.contains_vanilla, 0.49871 as standard_dev, round(avg(rating), 2) as average_rating, count(i.contains_vanilla) as count
+	FROM ratings_table r
+	JOIN ingredients_table i
+	ON r.review_id = i.review_id
+	WHERE contains_vanilla = 1
+	GROUP BY i.contains_vanilla;
+
+SELECT * FROM no_vanilla_sd
+UNION
+SELECT * FROM has_vanilla_sd;
+
+--Success! Now it's time to do a Z-test and see if there is a statistically significant difference between the two options!
+-- For a significance level of 0.05, the critical value is 1.96
+
+WITH standard_error_pow2_CTE AS(
+	SELECT (standard_dev*standard_dev)/count as standard_error_pow2
+	FROM no_vanilla_sd
+	UNION
+	SELECT (standard_dev*standard_dev)/count as standard_error_pow2
+	FROM has_vanilla_sd
+)
+
+SELECT sum(standard_error_pow2)
+FROM standard_error_pow2_CTE
+
+-- sqrt(000789562233266014) = 0.028099150045259626
+
+WITH complete_vanilla_temp_table AS(
+	SELECT * FROM no_vanilla_sd
+	UNION
+	SELECT * FROM has_vanilla_sd
+)
+
+SELECT average_rating - lead(average_rating) over (order by contains_vanilla) AS difference
+FROM complete_vanilla_temp_table
+LIMIT 1;
+
+-- The differences between the two averages are 0.19
+-- Now it's time to calculate the Z score
+
+SELECT 0.19/0.028099150045259626
+
+-- Z score ~ 6.76177
+-- 6.76177 > 1.96
+
+-- With a 5 percent significance level. 
+-- The difference in average rating between chocolate bars that contains vanilla and does not contain vanilla is statistically significant
