@@ -13,9 +13,11 @@ If you are trying to come up with your first chocolate bar recipe, I have three 
 
 These are the three main findings I found from looking at the feature importance score ranking and my exploratory analysis in SQL:
 
-  - The chocolate bars with a cacao percent between 65 and 75 has the highest average rating, so that seems to be a safe range to go for!
-  - The chocolate bars with a total of 2 or 3 ingredients has the highest average rating, so think, definetly less is more here!
-  - Chocolate bars that does not contain vanilla has a higher average rating, so unless you know what you're doing, skip the vanilla :P
+The chocolate bars with a cacao percent between 65 and 75 has the highest average rating, so that seems to be a safe range to go for!
+
+The chocolate bars with a total of 2 or 3 ingredients has the highest average rating, so think, definetly less is more here!
+
+Chocolate bars that does not contain vanilla has a statistically significant (5% significance level) higher rating than chocolate bars with vanilla, so unless you know what you're doing, skip the vanilla :P
 
 ## Code and Resources Used
 **Data:** https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-18/chocolate.csv
