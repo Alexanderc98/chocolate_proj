@@ -1,6 +1,5 @@
 # Predicting if a chocolate bar will taste bad or not using machine learning + EDA.
 
-* Created a tableau dashboard: https://public.tableau.com/app/profile/alexander4055/viz/chocolate_proj/Dashboard1
 * Used sklearn to create a binary classification model
 * Compared logistic regression, XGBoost and randomforest classification. For instance, did 10-fold cross validation and looked which model performed the best.
 * Used advanced SQL techniques to explore the data.
